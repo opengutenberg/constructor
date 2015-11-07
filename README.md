@@ -1,5 +1,5 @@
 
-# Serenix Linux iso builder
+# Constructor Linux iso builder
 
 ### Why ?
 I would like an ubuntu/debian distro with enlightenment as window manager. It should focus on security and privacy, in the end.
@@ -47,11 +47,11 @@ Also, an education-oriented variant whould be nice to have.
 # How to build an iso
 
 ```
-git clone https://github.com/calinmiclaus/serenix.git
-cd serenix
+git clone https://github.com/educatie/constructor.git
+cd constructor
 ./build.sh VARIANTNAME
 ```
-* This will build a new iso (called `serenix-BUILDNR-VARIANTNAME_amd64.iso`)
+* This will build a new iso (called `constructor-BUILDNR-VARIANTNAME_amd64.iso`)
 * must run on an *ubuntu64 14.04 system
 * make sure to have at least 4GB free disk space
 * make sure to run the build script as root (as it requires mount/chroot privileges), on a partition which supports setuid files (needed for the suid files in the chroot environment).
