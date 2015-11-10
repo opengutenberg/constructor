@@ -1,0 +1,18 @@
+# you can put comments here as long as the comment line STARTS EXACTLY with a "#" char
+# empty lines will be ignored
+
+desktop-base
+
+# needed by gtk2 themes
+gtk2-engines-pixbuf gtk2-engines
+
+lxappearance lxappearance-obconf lxde lxde-common lxde-core lxde-icon-theme lxinput lxlauncher lxmenu-data lxmusic lxpanel lxpolkit lxrandr lxsession lxsession-edit lxsession-logout lxshortcut lxtask lxterminal 
+software-center lxdm
+
+ubiquity-slideshow-lubuntu software-center xubuntu-icon-theme thunar mousepad
+
+geogebra avogadro gperiodic stellarium blender gimp quiterss octave
+
+chromium-browser audacious vlc
+
+#libreoffice
