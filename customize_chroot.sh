@@ -1,6 +1,6 @@
 #!/bin/bash
 
-logoutput="/serenix_output.log"
+logoutput="/linuxedu_chroot.log"
 
 txtred='\e[0;31m' # Red
 txtgrn='\e[0;32m' # Green
@@ -85,9 +85,9 @@ cat <<EOF >/etc/casper.conf
 # Supported variables are:
 # USERNAME, USERFULLNAME, HOST, BUILD_SYSTEM, FLAVOUR
 
-export USERNAME="serenix"
-export USERFULLNAME="Live session user"
-export HOST="serenix"
+export USERNAME="linuxedu"
+export USERFULLNAME="Live session"
+export HOST="linuxedu"
 export BUILD_SYSTEM="Ubuntu"
 
 # USERNAME and HOSTNAME as specified above won't be honoured and will be set to
@@ -106,7 +106,7 @@ Description=Text mode theme based on ubuntu-logo theme
 ModuleName=ubuntu-text
 
 [ubuntu-text]
-title=Serenix Dawn $version
+title=LinuxEDU Palade $version
 black=0x000066
 white=0xffffff
 brown=0x000000
