@@ -106,7 +106,7 @@ Description=Text mode theme based on ubuntu-logo theme
 ModuleName=ubuntu-text
 
 [ubuntu-text]
-title=LinuxEDU Palade $version
+title=LinuxEDU $version
 black=0x000066
 white=0xffffff
 brown=0x000000

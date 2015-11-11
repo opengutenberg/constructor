@@ -65,7 +65,7 @@ bitness="amd64"
 buildversion=`cat variants/${variant}/build`
 [ -z "${buildversion}" ] && buildversion=0
 buildversion=$(( $buildversion + 1 ))
-version="${variant}-build${buildversion}"
+version="${variant}-b${buildversion}"
 
 logoutput="linuxedu-${version}.log"
 
@@ -96,7 +96,7 @@ fi
 [ -d chroot.clean ] && \
 {
     info "Copying debootstraped system (from chroot.clean) to chroot/"
-    cp -R chroot.clean/* chroot/
+    cp --preserve=all -R chroot.clean/* chroot/
 } || \
 {
 # install the base system in chroot
@@ -111,10 +111,10 @@ mount -o bind /dev chroot/dev
 # copy common resources BEFORE variant speciffic ones. Variant resources might need to overwrite common ones
 info "Copying common resources to chroot"
 mkdir chroot/resources
-cp -R variants/COMMON/* chroot/resources
+cp --preserve=all -R variants/COMMON/* chroot/resources
 
 info "Copying variant resources to chroot"
-cp -R variants/${variant}/resources/* chroot/resources
+cp --preserve=all -R variants/${variant}/resources/* chroot/resources
 
 # copying the customization script in chroot
 info "Running customize_chroot.sh"
@@ -193,7 +193,7 @@ EOF
 cat <<EOF >image/isolinux/isolinux.txt
 ************************************************************************
 
-   LinuxEDU Palade, build $version.
+   LinuxEDU $version.
 
 ************************************************************************
 EOF
