@@ -62,6 +62,12 @@ variant=$1
     }
 
 bitness="amd64"
+#debootstrap
+#If you are running a 64bit kernel and install a 32bit chroot (architectures i386, lpia on amd64, sparc, powerpc), add the line:
+# personality=linux32
+#and install the linux32 package. This avoids prefixing each schroot command with the linux32 command.
+# aliases=dokochroot,default
+
 buildversion=`cat variants/${variant}/build`
 [ -z "${buildversion}" ] && buildversion=0
 buildversion=$(( $buildversion + 1 ))
