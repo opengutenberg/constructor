@@ -1,3 +1,5 @@
 chroot.clean/*
 chroot/*
 image/*
+*.log
+*.iso
