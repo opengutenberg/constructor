@@ -9,10 +9,11 @@ gtk2-engines-pixbuf gtk2-engines
 lxappearance lxappearance-obconf lxde lxde-common lxde-core lxde-icon-theme lxinput lxlauncher lxmenu-data lxmusic lxpanel lxpolkit lxrandr lxsession lxsession-edit lxsession-logout lxshortcut lxtask lxterminal 
 software-center lxdm
 
-ubiquity-slideshow-lubuntu software-center xubuntu-icon-theme thunar mousepad
+ubiquity-slideshow-lubuntu software-center xubuntu-icon-theme compton mousepad
 
 geogebra avogadro gperiodic stellarium blender gimp quiterss octave
 
 chromium-browser audacious vlc
 
+gnumeric abiword
 #libreoffice
