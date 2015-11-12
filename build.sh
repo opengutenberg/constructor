@@ -48,6 +48,7 @@ function warn()
 }
 
 variant=$1
+start_time=`date +%s`
 
 # check if we have the first argument (variant)
 [ $# -ne 1 ] &&
@@ -86,7 +87,7 @@ version="${variant}-b${buildversion}"
 logoutput="linuxedu-${version}.log"
 
 # installs the tools needed to build the iso 
-apt-get -y install debootstrap syslinux squashfs-tools genisoimage >>$logoutput
+apt-get -y install debootstrap syslinux squashfs-tools genisoimage bc >>$logoutput
 
 # create the directory 'chroot', exit if it exists. Make sure nothing is mounted in it
 [ ! -d chroot ] && mkdir -p chroot || \
@@ -273,3 +274,9 @@ info "Deleting image remains"
 rm -rf image
 
 info "Finish building LinuxEDU $version!"
+
+# measure how much time the build process took
+end_time=`date +%s`
+diff_min=`echo "($end_time - $start_time) / 60"|bc`
+diff_sec=`echo "($end_time - $start_time) % 60"|bc`
+info "The whole process took: $diff_min minutes, $diff_sec seconds"
