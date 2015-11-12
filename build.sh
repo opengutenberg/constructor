@@ -18,6 +18,17 @@ bldwht='\e[1;37m' # White
 txtrst='\e[0m'    # Text Reset
 
 
+# check if we're running on 14.04 (trusty)
+. /etc/lsb-release
+[ "$DISTRIB_CODENAME" != "trusty" ] &&
+{
+    echo -e "${bldred}`basename $0` is not running on ubuntu trusty (but:$DISTRIB_RELEASE - $DISTRIB_CODENAME).${txtrst}"
+    echo -en "${bldylw}Are you sure you want to continue (y/N) ?${txtrst}"
+    read not_trusty
+    [ "$not_trusty" != "y" -a "$not_trusty" != "Y" ] && exit 1
+}
+
+
 function info()
 {
     echo -e "===== `date +%D-%T` ${bldgrn}$*${txtrst}"
@@ -35,7 +46,6 @@ function warn()
     echo -e "===== `date +%D-%T` ${bldylw}$*${txtrst}"
     echo "===== `date +%D-%T` $*" >>$logoutput
 }
-
 
 variant=$1
 
