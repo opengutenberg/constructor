@@ -82,7 +82,7 @@ bitness="amd64"
 buildversion=`cat variants/${variant}/build`
 [ -z "${buildversion}" ] && buildversion=0
 buildversion=$(( $buildversion + 1 ))
-version="${variant}-b${buildversion}"
+version="${variant}-0.${buildversion}"
 
 logoutput="linuxedu-${version}.log"
 
