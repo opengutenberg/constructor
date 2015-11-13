@@ -135,6 +135,7 @@ cp --preserve=all -R variants/${variant}/resources/* chroot/resources
 
 # copying the customization script in chroot
 info "Running customize_chroot.sh"
+info "(you can tail -f chroot/linuxedu_chroot.log to see the output)"
 cp customize_chroot.sh chroot/
 cp variants/${variant}/variant.sh chroot/
 cp variants/${variant}/packages.list chroot/
@@ -208,11 +209,9 @@ PROMPT 0
 EOF
 
 cat <<EOF >image/isolinux/isolinux.txt
-************************************************************************
 
-   LinuxEDU $version.
+LinuxEDU $version
 
-************************************************************************
 EOF
 
 # create manifest
