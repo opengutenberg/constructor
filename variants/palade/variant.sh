@@ -3,6 +3,8 @@
 # it will get executed inside chroot, after all packages are installed
 # you can assume variant resources are in /resources
 
+dpkg -a --configure
+
 # creating/updadeing icon caches
 find /usr/share/icons -maxdepth 1 -type d|grep -vx "/usr/share/icons"|while read icon;
 do
