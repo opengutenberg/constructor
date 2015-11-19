@@ -1,5 +1,8 @@
 #!/bin/bash
 
+distroname="LinuxEDU"
+lowercase_distroname=`echo $distroname | tr "[:upper:]" "[:lower:]"`
+
 txtred='\e[0;31m' # Red
 txtgrn='\e[0;32m' # Green
 txtylw='\e[0;33m' # Yellow
@@ -84,7 +87,7 @@ buildversion=`cat variants/${variant}/build`
 buildversion=$(( $buildversion + 1 ))
 version="${variant}-0.${buildversion}"
 
-logoutput="linuxedu-${version}.log"
+logoutput="${lowercase_distroname}-${version}.log"
 
 # installs the tools needed to build the iso 
 apt-get -y install debootstrap syslinux squashfs-tools genisoimage bc >>$logoutput
@@ -135,7 +138,7 @@ cp --preserve=all -R variants/${variant}/resources/* chroot/resources
 
 # copying the customization script in chroot
 info "Running customize_chroot.sh"
-info "(you can tail -f chroot/linuxedu_chroot.log to see the output)"
+info "(you can tail -f chroot/${lowercase_distroname}_chroot.log to see the output)"
 cp customize_chroot.sh chroot/
 cp variants/${variant}/variant.sh chroot/
 cp variants/${variant}/packages.list chroot/
@@ -147,7 +150,7 @@ chroot chroot /customize_chroot.sh $version
 
 # remove the scripts from chroot
 rm -f chroot/customize_chroot.sh chroot/packages.list chroot/variant.sh
-mv chroot/linuxedu_chroot.log ./linuxedu-chroot-${version}.log
+mv chroot/${lowercase_distroname}_chroot.log ./${lowercase_distroname}-chroot-${version}.log
 
 # kill the processes still running in chroot which use devices in chroot/dev (dbus,cups,...). This is needed for unmounting the dev directory
 info "Killing hanged processes"
@@ -188,7 +191,7 @@ cp /usr/lib/syslinux/isolinux.bin image/isolinux/
 cat <<EOF >image/isolinux/isolinux.cfg
 DEFAULT live
 LABEL live
-  menu label ^Start or install LinuxEDU
+  menu label ^Start or install $distroname
   kernel /casper/vmlinuz
   append  file=/cdrom/preseed/ubuntu.seed boot=casper initrd=/casper/initrd.lz quiet splash --
 LABEL check
@@ -210,7 +213,7 @@ EOF
 
 cat <<EOF >image/isolinux/isolinux.txt
 
-LinuxEDU $version
+$distroname $version
 
 EOF
 
@@ -240,7 +243,7 @@ echo $fssize > image/casper/filesystem.size
 
 # create diskdefines
 cat <<EOF >image/README.diskdefines
-#define DISKNAME LinuxEDU Palade
+#define DISKNAME $distroname $variant
 #define TYPE  binary
 #define TYPEbinary  1
 #define ARCH  amd64
@@ -255,7 +258,7 @@ mkdir image/.disk
 cd image/.disk
 touch base_installable
 echo "full_cd/single" > cd_type
-echo "LinuxEDU Palade" > info
+echo "$distroname $variant" > info
 echo "http://www.linuxpentrueducatie.ro" > release_notes_url
 cd ../..
 
@@ -266,13 +269,13 @@ find . -type f -print0 | xargs -0 md5sum | grep -v "\./md5sum.txt" > md5sum.txt
 
 # build the iso and increment version if successfull
 info "Build the iso"
-mkisofs -r -V "LinuxEDU $version" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ../linuxedu-${version}_${bitness}.iso . >> $logoutput && echo $buildversion >../variants/${variant}/build
+mkisofs -r -V "$distroname $version" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ../${lowercase_distroname}-${version}_${bitness}.iso . >> $logoutput && echo $buildversion >../variants/${variant}/build
 cd ..
 
 info "Deleting image remains"
 rm -rf image
 
-info "Finish building LinuxEDU $version!"
+info "Finish building $distroname $version!"
 
 # measure how much time the build process took
 end_time=`date +%s`
