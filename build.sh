@@ -75,7 +75,9 @@ start_time=`date +%s`
 	exit 1
     }
 
-bitness="amd64"
+#bitness="amd64"
+bitness="i386"
+
 #debootstrap
 #If you are running a 64bit kernel and install a 32bit chroot (architectures i386, lpia on amd64, sparc, powerpc), add the line:
 # personality=linux32
@@ -120,7 +122,7 @@ fi
 } || \
 {
 # install the base system in chroot
-    info "Installing the base system in chroot"
+    info "Installing the base system in chroot (${bitness})"
     debootstrap --arch=${bitness} trusty chroot >>$logoutput
 }
 
@@ -275,7 +277,7 @@ cd ..
 info "Deleting image remains"
 rm -rf image
 
-info "Finish building $distroname $version!"
+info "Finish building $distroname $version $bitness!"
 
 # measure how much time the build process took
 end_time=`date +%s`
